@@ -52,7 +52,7 @@ print(f"{lion1.name} has health level of {lion1.happiness}")
 lion1.feed()
 print(f"{lion1.name} has health level of {lion1.health} and Happiness of {lion1.happiness}")
 zoo=Zoo("Qalqilia")
-zoo.add_animal(lion1)c
+zoo.add_animal(lion1)
 
 
 
