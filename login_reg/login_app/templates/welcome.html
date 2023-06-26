@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Classes</title>
+    {% load bootstrap5 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+</head>
+<body>
+    <ul class="nav nav-pills nav-fill">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#">{{name}} </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="logout">Logout</a>
+        </li>
+      </ul>
+    <div class="container mt-5">
+        <div class="row">
+          <div class="col-md-6">
+            <h4>Courses</h4>
+            <table class="table">
+                <thead>
+                    <th>Course Name</th>
+                    <th>Instructor</th>
+                    <th>Weekday</th>
+                    <th>Price</th>
+                    <th>Time</th>
+
+                </thead>
+                {% for course in courses%}
+                <tr>
+                    <td><a href="classes/{{course.id}}">{{course.name}}</a>
+                    {% if logged_user in course.instructors.all %}
+                        <a style = "color:green; "href="classes/{{course.id}}/edit">Edit</a>
+                    {% endif %}
+                    </td>
+                    <td>{% for instructor in course.instructors.all %}  {{instructor.lname}}  {% endfor%}  </td>
+                    <td>{{course.Weekday}}</td>
+                    <td>$ {{course.price}}</td>
+                    <td>{{course.time}}</td>
+                </tr>
+                {% endfor %}
+            </table>
+            <a href="classes/create_course">Add Course</a>
+        </div>
+      </div>
+</body>
+</html>

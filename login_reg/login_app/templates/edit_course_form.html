@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Course</title>
+    {% load bootstrap5 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+</head>
+<body>
+    <ul class="nav nav-pills nav-fill">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#">{{name}}</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="logout">Logout</a>
+        </li>
+      </ul>
+      {% if messages %}
+      Errors
+        <ul class="messages">    
+            {% for message in messages %}    
+                <li {% if message.tags %} {% endif %}>{{ message }}</li>    
+            {% endfor %}
+        </ul>
+        {% endif %}
+
+    <div class="container mt-5">
+        <div class="row">
+          <div class="col-md-6">
+            <h4>Edit course</h4>
+
+            <form action="edit/update" method="POST">
+              {% csrf_token %}
+            <table class="table">
+                <tr>
+                    <td>Name</td>
+                    <td><input type="text" name="course_name" value="{{course.name}}" required ></td>
+                </tr>
+                <tr>
+                  <td>Day of Week</td>
+                  <td>
+                     <select class="form-select" id="inputGroupSelect01" name="weekday" value="{{course.weekday}}" required>
+                    <option value="Mon">Monday</option>
+                    <option value="Tue">Tuesday</option>
+                    <option value="Wed">Wednesday</option>
+                    <option value="Thu">Thursday</option>
+                    <option value="Fri">Friday</option>
+                    <option value="Sat">Saturday</option>
+                    <option value="Sun">Sunday</option>
+                  </select>
+                </td>
+              </tr>
+              <tr>
+                <td>Price $</td>
+                <td><input type="number" id="quantity" name="price" min="0" placeholder="{{course.weekday}}" value="{{course.price}}" required></td>
+              </tr>
+              <tr>
+                <td>time</td>
+                <td><input type="time" id="appt" name="time" value="{{course.time}}"></td>
+              </tr>
+              <tr>
+                <td>Description</td>
+                <td><textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="desc" value="{{course.desc}}"></textarea></td>
+              </tr>
+            </table>
+            <input type="submit" value="Update">
+          </form>
+
+            <a href="/classes">Cancel</a>
+            <a href="edit/del">Delete</a>
+
+                </div>
+      </div>
+</body>
+</html>
